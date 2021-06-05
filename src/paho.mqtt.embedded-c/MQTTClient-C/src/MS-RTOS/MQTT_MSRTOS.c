@@ -15,10 +15,10 @@
  *    Ian Craggs - return codes from linux_read
  *******************************************************************************/
 
-#include "MQTTMsRTOS.h"
+#include "MQTT_MSRTOS.h"
 
 #define __MQTT_THREAD_NAME          "t_mqtt"
-#define __MQTT_THREAD_STK_SIZE      8192U
+#define __MQTT_THREAD_STK_SIZE      2048U
 #define __MQTT_THREAD_PRIO          9U
 #define __MQTT_THREAD_TIME_SLICE    0U
 
@@ -87,7 +87,7 @@ int TimerLeftMS(Timer* timer)
 }
 
 
-int linux_read(Network* n, unsigned char* buffer, int len, int timeout_ms)
+int NetworkRead(Network* n, unsigned char* buffer, int len, int timeout_ms)
 {
 	struct timeval interval = {timeout_ms / 1000, (timeout_ms % 1000) * 1000};
 	if (interval.tv_sec < 0 || (interval.tv_sec == 0 && interval.tv_usec <= 0))
@@ -120,7 +120,7 @@ int linux_read(Network* n, unsigned char* buffer, int len, int timeout_ms)
 }
 
 
-int linux_write(Network* n, unsigned char* buffer, int len, int timeout_ms)
+int NetworkWrite(Network* n, unsigned char* buffer, int len, int timeout_ms)
 {
 	struct timeval tv;
 
@@ -136,8 +136,8 @@ int linux_write(Network* n, unsigned char* buffer, int len, int timeout_ms)
 void NetworkInit(Network* n)
 {
 	n->my_socket = 0;
-	n->mqttread = linux_read;
-	n->mqttwrite = linux_write;
+	n->mqttread = NetworkRead;
+	n->mqttwrite = NetworkWrite;
 }
 
 

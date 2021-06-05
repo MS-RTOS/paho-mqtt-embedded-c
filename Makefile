@@ -75,7 +75,7 @@ include $(MKTEMP)/header.mk
 # Include targets makefiles
 #*********************************************************************************************************
 include libpaho-embed-mqtt3c.mk
-include libmqttclient-c.mk
+include mqtt-client-example.mk
 
 #*********************************************************************************************************
 # Include end.mk

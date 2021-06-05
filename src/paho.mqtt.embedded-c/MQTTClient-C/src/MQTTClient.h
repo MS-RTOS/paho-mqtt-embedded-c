@@ -36,7 +36,7 @@
 
 #ifdef __MS_RTOS__
 #define MQTT_TASK 1
-#include "msrtos/MQTTMsRTOS.h"
+#include "MS-RTOS/MQTT_MSRTOS.h"
 #endif
 
 #include "MQTTPacket.h"

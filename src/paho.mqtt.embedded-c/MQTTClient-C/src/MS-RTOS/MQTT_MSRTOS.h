@@ -85,8 +85,8 @@ typedef struct Network
 	int (*mqttwrite) (struct Network*, unsigned char*, int, int);
 } Network;
 
-int linux_read(Network*, unsigned char*, int, int);
-int linux_write(Network*, unsigned char*, int, int);
+int NetworkRead(Network*, unsigned char*, int, int);
+int NetworkWrite(Network*, unsigned char*, int, int);
 
 DLLExport void NetworkInit(Network*);
 DLLExport int NetworkConnect(Network*, char*, int);

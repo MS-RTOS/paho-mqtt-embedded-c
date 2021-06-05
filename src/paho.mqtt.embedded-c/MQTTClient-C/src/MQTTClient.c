@@ -279,6 +279,7 @@ int cycle(MQTTClient* c, Timer* timer)
             MQTTString topicName;
             MQTTMessage msg;
             int intQoS;
+            bzero(&topicName, sizeof(topicName));
             msg.payloadlen = 0; /* this is a size_t, but deserialize publish sets this as int */
             if (MQTTDeserialize_publish(&msg.dup, &intQoS, &msg.retained, &msg.id, &topicName,
                (unsigned char**)&msg.payload, (int*)&msg.payloadlen, c->readbuf, c->readbuf_size) != 1)

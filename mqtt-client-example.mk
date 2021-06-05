@@ -10,7 +10,7 @@
 #
 #--------------文件信息--------------------------------------------------------------------------------
 #
-# 文   件   名: libmqttclient-c.mk
+# 文   件   名: mqtt-client-example.mk
 #
 # 创   建   人: IoT Studio
 #
@@ -27,20 +27,22 @@ include $(CLEAR_VARS_MK)
 #*********************************************************************************************************
 # Target
 #*********************************************************************************************************
-LOCAL_TARGET_NAME := libmqttclient-c.a
+LOCAL_TARGET_NAME := mqtt-client-example
 
 #*********************************************************************************************************
 # Source list
 #*********************************************************************************************************
 LOCAL_SRCS :=  \
-src/paho.mqtt.embedded-c/MQTTClient-C/src/msrtos/MQTTMsRTOS.c \
-src/paho.mqtt.embedded-c/MQTTClient-C/src/MQTTClient.c
+src/paho.mqtt.embedded-c/MQTTClient-C/src/MS-RTOS/MQTT_MSRTOS.c \
+src/paho.mqtt.embedded-c/MQTTClient-C/src/MQTTClient.c \
+src/paho.mqtt.embedded-c/MQTTClient-C/samples/MS-RTOS/MQTTEcho.c
 
 #*********************************************************************************************************
 # Header file search path (eg. LOCAL_INC_PATH := -I"Your header files search path")
 #*********************************************************************************************************
 LOCAL_INC_PATH := \
--I"./src/paho.mqtt.embedded-c/MQTTPacket/src"
+-I"./src/paho.mqtt.embedded-c/MQTTPacket/src" \
+-I"./src/paho.mqtt.embedded-c/MQTTClient-C/src"
 
 #*********************************************************************************************************
 # Pre-defined macro (eg. -DYOUR_MARCO=1)
@@ -56,8 +58,8 @@ LOCAL_CXXFLAGS :=
 #*********************************************************************************************************
 # Depend library (eg. LOCAL_DEPEND_LIB := -la LOCAL_DEPEND_LIB_PATH := -L"Your library search path")
 #*********************************************************************************************************
-LOCAL_DEPEND_LIB      := 
-LOCAL_DEPEND_LIB_PATH := 
+LOCAL_DEPEND_LIB      := -lpaho-embed-mqtt3c
+LOCAL_DEPEND_LIB_PATH := -L"$(MSRTOS_BASE_PATH)/paho-mqtt-embedded-c/$(OUTDIR)"
 
 #*********************************************************************************************************
 # C++ config
@@ -86,9 +88,9 @@ LOCAL_POST_STRIP_CMD :=
 #*********************************************************************************************************
 # Depend target
 #*********************************************************************************************************
-LOCAL_DEPEND_TARGET := 
+LOCAL_DEPEND_TARGET := $(OUTDIR)/libpaho-embed-mqtt3c.a
 
-include $(STATIC_LIBRARY_MK)
+include $(APPLICATION_MK)
 
 #*********************************************************************************************************
 # End
