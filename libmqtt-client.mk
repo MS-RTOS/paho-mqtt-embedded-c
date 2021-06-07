@@ -10,7 +10,7 @@
 #
 #--------------文件信息--------------------------------------------------------------------------------
 #
-# 文   件   名: libpaho-embed-mqtt3c.mk
+# 文   件   名: libmqtt-client.mk
 #
 # 创   建   人: IoT Studio
 #
@@ -27,27 +27,21 @@ include $(CLEAR_VARS_MK)
 #*********************************************************************************************************
 # Target
 #*********************************************************************************************************
-LOCAL_TARGET_NAME := libpaho-embed-mqtt3c.a
+LOCAL_TARGET_NAME := libmqtt-client.a
 
 #*********************************************************************************************************
 # Source list
 #*********************************************************************************************************
 LOCAL_SRCS :=  \
-src/paho.mqtt.embedded-c/MQTTPacket/src/MQTTConnectClient.c \
-src/paho.mqtt.embedded-c/MQTTPacket/src/MQTTConnectServer.c \
-src/paho.mqtt.embedded-c/MQTTPacket/src/MQTTDeserializePublish.c \
-src/paho.mqtt.embedded-c/MQTTPacket/src/MQTTFormat.c \
-src/paho.mqtt.embedded-c/MQTTPacket/src/MQTTPacket.c \
-src/paho.mqtt.embedded-c/MQTTPacket/src/MQTTSerializePublish.c \
-src/paho.mqtt.embedded-c/MQTTPacket/src/MQTTSubscribeClient.c \
-src/paho.mqtt.embedded-c/MQTTPacket/src/MQTTSubscribeServer.c \
-src/paho.mqtt.embedded-c/MQTTPacket/src/MQTTUnsubscribeClient.c \
-src/paho.mqtt.embedded-c/MQTTPacket/src/MQTTUnsubscribeServer.c
+src/paho.mqtt.embedded-c/MQTTClient-C/src/MS-RTOS/MQTT_MSRTOS.c \
+src/paho.mqtt.embedded-c/MQTTClient-C/src/MQTTClient.c
 
 #*********************************************************************************************************
 # Header file search path (eg. LOCAL_INC_PATH := -I"Your header files search path")
 #*********************************************************************************************************
-LOCAL_INC_PATH := 
+LOCAL_INC_PATH := \
+-I"./src/paho.mqtt.embedded-c/MQTTPacket/src" \
+-I"./src/paho.mqtt.embedded-c/MQTTClient-C/src"
 
 #*********************************************************************************************************
 # Pre-defined macro (eg. -DYOUR_MARCO=1)
